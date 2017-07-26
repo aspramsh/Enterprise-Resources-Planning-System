@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "UpdateEmployeeManagement";
+}
+@model ERPS.ServiceLayer.Models.EmployeeManagementModel
+@using (Html.BeginForm("actionName", "controllerName", FormMethod.Post, new { id = "my-form" }))
+{
+    <h2> Add Info About Employee </h2>
+    <!doctype html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>Add Info About Employee</title>
+    </head>
+    <body>
+        <div id="common">
+            <form id="my-form">
+                <p class="employee">Add Info About Employee</p>
+                <p>
+                    <label> Name </label><br>
+                    <input name="name" type="text" size="25" maxlength="35">
+                    @Html.TextBoxFor(employee => employee.Name)
+                </p>
+
+                <p>
+                    <label> Last Name </label><br>
+                    <input name="lastname" type="text" size="25" maxlength="35">
+             
+                </p>
+
+                <p>
+                    <label> </label>
+                    <input name="male" type="radio" value="male">  Male
+                    <input name="male" type="radio" value="female">  Female
+                   
+                </p>
+
+                <p>
+                    <label> Date of Bight </label><br>
+                    <input type="date" name="dateofbight" size="25" maxlength="35">
+         
+                </p>
+                <p>
+                    <label>Skills</label><br>
+                    <input name="skills" list="" size="25" maxlength="35">
+               
+                <p> </p>
+                <textarea name="text" cols="45" rows="5" id="text">Write description about Skills</textarea>
+                </p>
+                <p>
+                    <label>Role</label><br>
+                    <input name="role" list="" size="25" maxlength="35">
+                  
+                <p></p>
+                <textarea name="text" cols="45" rows="5" id="text">Write description about Role</textarea>
+                </p>
+                <p>
+                    <label>Team</label><br>
+                    <input name="team" list="" size="25" maxlength="35">
+                    
+                </p>
+                <p>
+                    <label>Project</label><br>
+                    <input name="project" list="" size="25" maxlength="35">
+                   
+                </p>
+            </form>
+        </div>
+    </body>
+</html>
+<p>
+    <input name="ok" type="submit" value="Add Info">
+</p>
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+	$(document).on('click', '#form-submit', function () {
+		$.ajax({
+			url: "AddEmployee",
+			type: "POST",
+			data: $('form#my-form').serialize(),
+		});
+	});
+</script>
+
+

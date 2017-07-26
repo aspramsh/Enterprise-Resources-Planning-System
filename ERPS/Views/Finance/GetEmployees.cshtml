@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutFinance.cshtml";
+}
+<h1> Salary Details</h1>
+<td><input value="First Name" readonly /></td>
+<td><input value="Last Name" readonly /></td>
+<td><input value="Salary" readonly /></td><br />
+@model IEnumerable<ERPS.ServiceLayer.Models.EmployeeFinanceModel>
+@foreach (var item in Model)
+{
+	<td><input value=@item.Name readonly /></td>
+	<td><input value=@item.LastName readonly /></td>
+	<td><input value=@item.Salary readonly /></td>
+	<td>@Html.ActionLink("Edit", "UpdateEmployee", new { id = item.Id, Name = item.Name, LastName = item.LastName, Salary = item.Salary}) | </td>
+	<td>@Html.ActionLink("Salary chart", "SalaryChart", new { id = item.Id }) </td><br />
+}
+

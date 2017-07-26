@@ -1,0 +1,101 @@
+﻿@*@model ERPS.DataModel.Entities.Management.Employee*@
+@model ERPS.ServiceLayer.Models.EmployeeManagementModel
+
+@{
+    ViewBag.Title = "UpdateEmployee";
+    Layout = "~/Views/Shared/_LayoutManagement.cshtml";
+    Html.EnableClientValidation(false);
+}
+
+@*@{ 
+    var urlBase = (string)ViewData["urlBase"];
+}*@
+<h2>Edit Employee Data</h2>
+@*@using (Html.BeginRouteForm("Default", null, FormMethod.Post,
+                                        new { @class = "employeeCssClass", data_formType = "employee" }))*@
+@using (Html.BeginForm("actionName", "controllerName", FormMethod.Post, new { id = "my-form" }))
+{
+    <form action="ParseJSONEmployee" method="post">
+        @Html.HiddenFor(employee => Model.Id)
+        @*<input type="hidden" id="ArticleId" name="ArticleId" value="@Model.Id" />*@
+        <div class="item">
+            <label>Name</label>
+            @*@Html.TextBoxFor(employee => employee.Name)*@
+            @*@Html.TextBoxFor(employee => employee.Name, new { Value = @ViewBag.employeeName })*@
+            @Html.TextBoxFor(employee => employee.Name, new { Value = Model.Name, @readonly = "readonly" })
+
+        </div>
+        <div class="item">
+            <label>Surname</label>
+            @*@Html.TextBoxFor(employee => employee.Surname)*@
+            @*@Html.TextBoxFor(employee => employee.Surname, new { Value = @ViewBag.employeeLastName })*@
+            @Html.TextBoxFor(employee => employee.Surname, new { Value = Model.Surname, @readonly = "readonly" })
+        </div>
+        @*<div class="item">
+            <label>Age</label>
+            @Html.TextBoxFor(employee => employee.Age)
+        </div>*@
+        <div class="item">
+            <label>Team</label>
+            @Html.TextBoxFor(employee => employee.Team, new { Value = Model.Team })
+        </div>
+        <div class="item">
+            <label>Role</label>
+            @Html.TextBoxFor(employee => employee.Role, new { Value = Model.Role })
+        </div>
+        <div class="item">
+            <label>Project</label>
+            @Html.TextBoxFor(employee => employee.Project, new { Value = Model.Project })
+        </div>
+        <div class="item">
+            <label>Task</label>
+            @Html.TextBoxFor(employee => employee.Task, new { Value = Model.Task })
+        </div>
+
+    </form>
+   
+    <!--
+    < div class="item">
+        <label>Team Name</label>
+        @*@Html.TextBoxFor(employee => employee.Team.Name)*@
+        @*html.DropDownListFor  to show list of enum elements*@
+        @*new SelectList(Enum.GetNames(typeof(ERPS.DataModel.Entities.Management.Team)))*@
+    </div>
+    -->
+
+    @*@Html.TextBoxFor(x => x.Name)
+    @Html.TextBoxFor(x => x.Age)*@
+    <!--<input type="submit" id="form-submit" value="Add Employee" onclick="addEmployeeToTeam()" />-->
+    <input type="button" value="Update Employee" id="form-submit" />
+   
+    <div>
+
+        @*<label>Name</label>
+        <input type="text" id="name" /> <br />
+        <label>Age</label>
+        <input type="number" id="age" /> <br />
+        <label>Team Name</label>
+        <input type="text" id="name" /> <br />
+        <button onclick="addOrder()">Add Employee</button>*@
+
+    </div>
+    <!--Added reference to a script um stands for user management (team)-->
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+	$(document).on('click', '#form-submit', function () {
+		$.ajax({
+		    // urlBase = "http://localhost:64292/"
+		    // updateEmployeeAction = "Management/ParseJSONEmployee"
+		    // url: http://localhost:64292/Management/ParseJSONEmployee
+		    url: "@ViewBag.urlBase" + "@ViewBag.updateEmployeeAction",
+			type: "POST",
+			data: $('form#my-form').serialize(),
+			success: function (result) {
+			    window.location.href = '/Management/GetEmployees'
+			}
+		});
+	});
+    </script>
+    @*<script src="~/Scripts/umAddEmployeeToTeam.js"></script>*@
+}
+<link rel="stylesheet" href="~/Content/mUpdateEmployee.css" type="text/css">

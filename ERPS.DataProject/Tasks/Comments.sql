@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Comments]
+(
+	[TaskId] INT NOT NULL PRIMARY KEY,
+    [Text] VARCHAR(50) NULL, 
+    CONSTRAINT [FK_Comments_ToTask] FOREIGN KEY ([TaskId]) REFERENCES [Task]([Id]) ON DELETE CASCADE
+)

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ERPS.ServiceLayer.Models.EmployeeManagementModel>
+
+@{
+    ViewBag.Title = "GetEmployees";
+    Layout = "~/Views/Shared/_LayoutManagement.cshtml";
+}
+
+<h2>Employees</h2>
+
+
+<table class="table" border="1">
+    <tr>
+        <td>Name</td>
+        <td>LastName</td>
+        <td>Team</td>
+        <td>Role</td>
+        <td>Project</td>
+        <td>Task</td>
+        <td>Update information</td>
+        <td>Share opinion</td>
+        <td>Get opinions</td>
+		<td>Show performance</td>
+    </tr>
+    @foreach (var employee in Model)
+    {
+        <tr>
+            <td>@employee.Name</td>
+            <!--employee.LastName-->
+            <td>@employee.Surname</td>
+            <td>@employee.Team</td>
+            <td>@employee.Role</td>
+            <td>@employee.Project</td>
+            <td>@employee.Task</td>
+            <td>@Html.ActionLink("Update Data", "UpdateEmployee", new { Id = employee.Id, Name = employee.Name,
+               LastName = employee.Surname, Surname = employee.Surname, Team = employee.Team,
+               Role = employee.Role, Project = employee.Project, Task = employee.Task}) </td>
+            <td>@Html.ActionLink("Leave Feedback", "LeaveFeedback", new { Id = employee.Id,
+               Name = employee.Name,
+               Surname = employee.Surname,
+               Team = employee.Team }) </td>
+            <td>@Html.ActionLink("Show Feedbacks", "GetEmployeeFeedbacks", new { Id = employee.Id, Name = employee.Name, Surname = employee.Surname })</td>
+			<td>@Html.ActionLink("Draw Performance chart", "DrawPerformanceChart", new { Id = employee.Id })</td>
+            @*"ShowFeedbacks"*@
+            @*<td>@Html.ActionLink("Delete", "DeleteEmployee", new { Id = employee.Id }) </td>*@
+        </tr>
+    }
+</table>
+@*<td>@Html.ActionLink("UpdateEmployee", "GetEmployees") |</td>*@
+@*<td>@Html.ActionLink("UpdateEmployee", "UpdateEmployee", "ManagementUpdateEmployee/UpdateEmployee") |</td>
+<td>@Html.ActionLink("LeaveFeedback", "LeaveFeedback", "Management") |</td>
+<td>@Html.ActionLink("ShowFeedbacks", "ShowFeedbacks", "Management") |</td>*@
+@*<td>@Html.ActionLink("UpdateEmployee", "GetEmployees") |</td>*@
+
+

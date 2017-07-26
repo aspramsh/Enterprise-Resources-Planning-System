@@ -1,0 +1,80 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutHR.cshtml";
+}
+
+@model ERPS.ServiceLayer.Models.EmployeeHRModel
+@using (Html.BeginForm("actionName", "controllerName", FormMethod.Post, new { id = "my-form" }))
+{
+  
+    <td><input value="Name" readonly /></td>
+    @Html.TextBoxFor(x => x.Name)<br>
+    <td><input value="LastName" readonly /></td>
+    @Html.TextBoxFor(x => x.LastName)<br>
+    <td><input value="Phone" readonly /></td>
+    @Html.TextBoxFor(x => x.Phone)<br>
+    <td><input value="Passport" readonly /></td>
+    @Html.TextBoxFor(x => x.Passport, new { id ="PassportID" })<br>  
+    <td><input value="SocialId" readonly /></td>
+    @Html.TextBoxFor(x => x.SocialId)<br>
+    <td><input value="Description" readonly /></td>
+    @Html.TextBoxFor(x => x.Description)<br>
+    <td><input value="Address" readonly /></td>
+    @Html.TextBoxFor(x => x.Address)<br>
+    <td><input value="DateOfHiring" readonly /></td>
+    @Html.TextBoxFor(x => x.DateOfHiring, "{0:dd MMM yyyy}", new { @type = "date" })<br>
+    <td><input value="DateOfBirth" readonly /></td>
+    @Html.TextBoxFor(x => x.DateOfBirth, "{0:dd MMM yyyy}", new { @type = "date" })<br>
+
+}
+
+
+
+
+    <input type="button" value="SaveEmployee" id="form-submit" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+	$(document).on('click', '#form-submit', function () {
+		$.ajax({
+            url: "@ViewBag.urlBase"+"@ViewBag.AddEmployee", 
+            type: "POST",
+            data: $('form#my-form').serialize(),
+            success: function (result) {
+                alert("Saved"),
+                    window.location.href = '/HR/GetHREmployees' ;
+            },
+		});
+    });
+
+</script>
+
+
+  <form id="file-form"  method="POST">
+  <input type="file" id="file-select"  multiple/>
+  <button type="submit" id="upload-button" onclick="myFunction()">Upload</button>
+</form>
+
+
+<script>
+
+    function myFunction() {
+        var fileSelect = document.getElementById('file-select');
+        var files = fileSelect.files;
+        var file = files[0];
+        var passID = document.getElementById('PassportID').value;
+        var formData = new FormData();
+
+        formData.append(passID, file, file.name);
+        event.stopPropagation(); // Stop stuff happening
+        event.preventDefault(); // Totally stop stuff happening
+            $.ajax({
+                type: "POST",
+                url: "@ViewBag.urlBase"+"@ViewBag.UploadCv",
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+              
+
+            });
+        }
+</script>

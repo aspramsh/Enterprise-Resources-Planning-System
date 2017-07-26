@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>ERPS.DataProject</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{e4e29f82-f7f4-4c31-92e0-0d591ccefdea}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql100DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>ERPS.DataProject</RootNamespace>
+    <AssemblyName>ERPS.DataProject</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <GenerateCreateScript>False</GenerateCreateScript>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Deployment|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="UpdateSalary.sql" />
+    <Build Include="HREmployee.sql" />
+    <Build Include="AddHREmployee.sql" />
+    <Build Include="RemoveHREmployee.sql" />
+    <Build Include="DeleteSalary.sql" />
+    <Build Include="mSkill.sql" />
+    <Build Include="mEmployeeSkills.sql" />
+    <Build Include="Employee.sql" />
+    <Build Include="umsp_UpdateEmployee.sql" />
+    <Build Include="umsp_UpdateEmployeeSkill.sql" />
+    <Build Include="umsp_AddEmployee.sql" />
+    <Build Include="GetHREmployees.sql" />
+    <Build Include="GetAllEmployeesFinance.sql" />
+    <Build Include="GetEmployeeFinanceById.sql" />
+    <Build Include="Salary.sql" />
+    <Build Include="umsp_GetEmployees.sql" />
+    <Build Include="GetHrEmployeeById.sql" />
+    <Build Include="umsp_DeleteEmployee.sql" />
+    <Build Include="Events.sql" />
+    <Build Include="AddEvent.sql" />
+    <Build Include="UpdateEvent.sql" />
+    <Build Include="GetNotifications.sql" />
+    <Build Include="UpdateHREmployee.sql" />
+    <Build Include="Tasks\AddTask.sql" />
+    <Build Include="Tasks\Comments.sql" />
+    <Build Include="Tasks\PopulateTables.sql" />
+    <Build Include="Tasks\ProjectType.sql" />
+    <Build Include="Tasks\Project.sql" />
+    <Build Include="Tasks\Severity.sql" />
+    <Build Include="Tasks\Task.sql" />
+    <Build Include="Tasks\TaskState.sql" />
+    <Build Include="Tasks\GetProjects.sql" />
+    <Build Include="Tasks\GetStates.sql" />
+    <Build Include="Tasks\GetSeverities.sql" />
+    <Build Include="GetBirthdays.sql" />
+    <Build Include="mEmployee.sql" />
+    <Build Include="umsp_GetManagementEmployees.sql" />
+    <Build Include="Tasks\Attachment.sql" />
+    <Build Include="Tasks\AddAttachment.sql" />
+    <Build Include="Tasks\GetTasks.sql" />
+    <Build Include="Tasks\DeleteTask.sql" />
+    <Build Include="mFeedback.sql" />
+    <Build Include="umsp_LeaveFeedback.sql" />
+    <Build Include="Tasks\GetEmployees.sql" />
+    <Build Include="umsp_GetEmployeeFeedbacks.sql" />
+    <Build Include="umsp_GetFeedbacks.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="ERPS.DataProject.refactorlog" />
+  </ItemGroup>
+</Project>

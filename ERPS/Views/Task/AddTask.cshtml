@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutManagement.cshtml";
+}
+@model ERPS.ServiceLayer.Models.TasksAndEmployees
+@using (Html.BeginForm("AddTask", "Task", FormMethod.Post, new { id = "my-form" }))
+{
+	<h1>Add Task</h1><br />
+	<td><input value="Planned Start" input type="datetime" readonly /></td>
+	@Html.TextBoxFor(x => x.task.PlannedStart, "{0:MM/dd//yy}", new { @type = "date" })<br>
+	<td><input value="Planned End" input type="datetime" readonly /></td>
+	@Html.TextBoxFor(x => x.task.PlannedEnd, "{0:MM/dd//yy}", new { @type = "date" })<br>
+	<td><input value="Actual Start" input type="datetime" readonly /></td>
+	@Html.TextBoxFor(x => x.task.ActualStart, "{0:MM/dd//yy}", new { @type = "date" })<br>
+	<td><input value="Actual End" input type="datetime" readonly /></td>
+	@Html.TextBoxFor(x => x.task.ActualEnd, "{0:MM/dd//yy}", new { @type = "date" })<br>
+	<td><input value="Description" readonly /></td>
+	@Html.TextBoxFor(x => x.task.Description)<br>
+	<td><input value="Comment" readonly /></td>
+	@Html.TextBoxFor(x => x.task.Comments)<br>
+	<td><input value="Revision" readonly /></td>
+	@Html.TextBoxFor(x => x.task.Revision)<br>
+	<td><input value="Source" readonly /></td>
+	@Html.TextBoxFor(x => x.task.Source)<br>
+	<td><input value="Task State" readonly /></td>
+	@Html.DropDownListFor(x => x.task.StateId, new SelectList(Model.states, "Id", "Name"))<br>
+	<td><input value="Severity" readonly /></td>
+	@Html.DropDownListFor(x => x.task.severity, new SelectList(Model.severities))<br>
+	<td><input value="Project Name" readonly /></td>
+	@Html.DropDownListFor(x => x.task.ProjectId, new SelectList(Model.projects, "Id", "Name"))<br>
+	<td><input value="Choose Reporter" readonly /></td>
+	@Html.DropDownListFor(x => x.task.ReporterId, new SelectList(Model.employees, "Id", "Name"))<br>
+	<td><input value="Choose Assignee" readonly /></td>
+	@Html.DropDownListFor(x => x.task.AssigneeId, new SelectList(Model.employees, "Id", "Name"))<br>
+	<input type="submit" value="Submit" />
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+	$(document).on('click', '#form-submit', function () {
+		$.ajax({
+			url: "@ViewBag.urlBase" + "@ViewBag.AddTask",
+			type: "POST",
+			data: $('form#my-form').serialize(),
+			success: function (result) {
+				window.location.href = '/task/GetTasks'
+			}
+		});
+	});
+</script>
+
+	<br />
+		<br />
+		<br />
+		<br />

@@ -1,0 +1,50 @@
+﻿@model ERPS.ServiceLayer.Models.EmployeesHRModel
+@{
+    Layout = "~/Views/Shared/_LayoutHR.cshtml";
+}
+
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .table1 {
+        border: 2px solid #eee;
+    }
+
+        .table1 td {
+            padding: 10px;
+        }
+</style>
+
+<table class="table" border="1">
+    <tr style="font-weight:700">
+
+        <td>Name</td>
+        <td>LastName</td>
+        <td>Address</td>
+        <td>Phone</td>
+    
+
+    </tr>
+
+    @foreach (var item in Model.ListOFEmployee)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.LastName</td>
+            <td>@item.Address</td>
+            <td>@item.Phone</td>
+            <td>@Html.ActionLink("Details", "GetHREmployeeById", new { id = item.Id }) </td>
+            <td>@Html.ActionLink("Delete", "DeleteEmployee", new { id = item.Id },  new { onclick = "return confirm('Are you sure you wish to delete this employee?')" }) </td>
+        
+        </tr>
+     
+    }
+</table>
+
+<td>@Html.ActionLink("AddEmployee", "AddEmployee", "HR") |</td>
+<td>@Html.ActionLink("GetCandidates", "GetCandidates", "HR") </td>
+

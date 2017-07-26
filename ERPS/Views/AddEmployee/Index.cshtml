@@ -1,0 +1,44 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model ERPS.ServiceLayer.Models.EmployeeHRModel
+@using (Html.BeginForm("actionName", "controllerName", FormMethod.Post, new { id = "my-form" }))
+{
+  
+    <td><input value="Name" readonly /></td>
+    @Html.TextBoxFor(x => x.Name)<br>
+    <td><input value="LastName" readonly /></td>
+    @Html.TextBoxFor(x => x.LastName)<br>
+    <td><input value="Phone" readonly /></td>
+    @Html.TextBoxFor(x => x.Phone)<br>
+    <td><input value="Passport" readonly /></td>
+    @Html.TextBoxFor(x => x.Passport)<br>
+    <td><input value="SocialId" readonly /></td>
+    @Html.TextBoxFor(x => x.SocialId)<br>
+    <td><input value="Description" readonly /></td>
+    @Html.TextBoxFor(x => x.Description)<br>
+    <td><input value="DateOfBirth" readonly /></td>
+    @Html.TextBoxFor(x => x.DateOfBirth)<br>
+    <td><input value="Address" readonly /></td>
+    @Html.TextBoxFor(x => x.Address)<br>
+    <td><input value="DateOfHiring" readonly /></td>
+    @Html.TextBoxFor(x => x.DateOfHiring)<br>
+
+}
+    <input type="button" value="Submit" id="form-submit" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+	$(document).on('click', '#form-submit', function () {
+		$.ajax({
+			url: "AddEmployee/AddEmployee",
+			type: "POST",
+			data: $('form#my-form').serialize(),
+		});
+	});
+</script>
+@using (Html.BeginForm("Upload", "AddEmployee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="file" name="file" />
+    <input type="submit" name="Submit" id="Submit" value="Upload" />
+}

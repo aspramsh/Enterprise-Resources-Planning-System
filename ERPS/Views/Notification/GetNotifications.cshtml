@@ -1,0 +1,45 @@
+﻿@model ERPS.ServiceLayer.Models.NotificationsModel
+@{
+    ViewBag.Title = "GetNotification";
+}
+@{
+    Layout = "~/Views/Shared/_LayoutHR.cshtml";
+}
+
+
+<h2>Events</h2>
+<table class="table" border="1">
+    <tr style="font-weight:700">
+
+        <td>Date</td>
+        <td>Address</td>
+        <td>Type</td>
+
+        @foreach (var item in Model.ListOfEvents)
+        {
+        <tr>
+            <td>@item.Date </td>
+            <td>@item.Address</td>
+            <td>@item.Type</td>
+        </tr>
+        }
+
+    </table>
+
+    <h2>BirthDays</h2>
+    <table class="table" border="1">
+        <tr style="font-weight:700">
+
+            <td>Date</td>
+            <td>FirstName</td>
+            <td>LastName</td>
+            @foreach (var item in Model.ListOfBirthdays)
+            {
+            <tr>
+                <td>@item.Date</td>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+            </tr>
+            }
+        </table>
+<td>@Html.ActionLink("Add Event", "index") </td>

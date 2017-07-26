@@ -1,0 +1,37 @@
+﻿@model ERPS.ServiceLayer.Models.NotificationModel
+@{
+    ViewBag.Title = "Notification";
+}
+@{
+    Layout = "~/Views/Shared/_LayoutHR.cshtml";
+}
+<h2> AddEvent</h2>
+@using (Html.BeginForm("actionName", "controllerName", FormMethod.Post, new { id = "addform" }))
+{
+  
+    <td><input value="Date" readonly /></td>
+    @Html.TextBoxFor(x => x.Date ,"{0:dd MMM yyyy}", new { @type = "date" })<br>
+    <td><input value="Address" readonly /></td>
+    @Html.TextBoxFor(x => x.Address)<br>
+    <td><input value="Type" readonly /></td>
+    @Html.DropDownListFor(x => x.Type, new SelectList(new List<Object> { new { value = "Sport", text = "Sport" }, new { value = "Interview", text = "Interview" }, new { value = "Conference", text = "Conference" } }, "value", "text"))<br>
+     <td><input value="EveryYear" readonly /></td>
+    @Html.DropDownListFor(x => x.EveryYear, new SelectList(new List<Object> { new { value = "True", text = "true" }, new { value = "False", text = "false" } }, "value", "text"))<br>
+
+}
+
+
+<input type="button" value="Submit" id="form-submit" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+	$(document).on('click', '#form-submit', function () {
+		$.ajax({
+            url: "@ViewBag.urlBase"+"@ViewBag.AddEvent",
+            type: "POST",
+            data: $('form#addform').serialize(),
+            success: function (result) {
+                alert("Added");
+            },
+		});
+	});
+</script>

@@ -1,0 +1,25 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutManagement.cshtml";
+}
+@model ERPS.ServiceLayer.Models.TaskId
+@using (Html.BeginForm("DeleteTask", "Task", FormMethod.Post, new { id = "my-form" }))
+{
+		@Html.HiddenFor(x => x.Id)<br />
+
+		<input type="button" value="Confirm" id="form-submit" />
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+	$(document).on('click', '#form-submit', function () {
+		$.ajax({
+			url: "DeleteTask",
+			type: "POST",
+			data: $('form#my-form').serialize(),
+			success: function (result) {
+				window.location.href = '/task/GetTasks' 
+			}
+		});
+	});
+</script>
+
+

@@ -1,0 +1,50 @@
+﻿@model ERPS.ServiceLayer.Models.EmployeeHRModel
+@{
+    ViewBag.Title = "GetHREmployeeById";
+}
+@{
+    Layout = "~/Views/Shared/_LayoutHR.cshtml";
+}
+
+    @using (Html.BeginForm("actionName", "controllerName", FormMethod.Post, new { id = "my-form1" }))
+    {
+
+   
+        @Html.HiddenFor(x => x.Id)<br />
+        <td><input value="Name" readonly /></td>
+        @Html.TextBoxFor(x => x.Name)<br>
+        <td><input value="LastName" readonly /></td>
+        @Html.TextBoxFor(x => x.LastName)<br>
+        <td><input value="Phone" readonly /></td>
+        @Html.TextBoxFor(x => x.Phone)<br>
+        <td><input value="Passport" readonly /></td>
+        @Html.TextBoxFor(x => x.Passport, new { id = "PassportID" })<br>
+        <td><input value="SocialId" readonly /></td>
+        @Html.TextBoxFor(x => x.SocialId)<br>
+        <td><input value="Description" readonly /></td>
+        @Html.TextBoxFor(x => x.Description)<br>
+        <td><input value="DateOfBirth" readonly /></td>
+        @Html.TextBoxFor(x => x.DateOfBirth, "{0:dd MMM yyyy}")<br>
+        <td><input value="Address" readonly /></td>
+        @Html.TextBoxFor(x => x.Address)<br>
+        <td><input value="DateOfHiring" readonly /></td>
+        @Html.TextBoxFor(x => x.DateOfHiring, "{0:dd MMM yyyy}")<br>
+    }
+    <input type="button" value="SaveChanges" id="form-submit" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+        $(document).on('click', '#form-submit', function () {
+            $.ajax({
+                url:  "@ViewBag.urlBase"+"@ViewBag.AddEmployee",
+                type: "POST",
+                data: $('form#my-form1').serialize(),
+                success: function (result) {
+                    alert("Saved"),
+                        window.location.href = '/HR/GetHREmployees';;
+                },
+            });
+        });
+    </script></br>
+    <td>@Html.ActionLink("DownloadCv", "DownloadCv", new { data = Model.Passport }) </td>
+
+   

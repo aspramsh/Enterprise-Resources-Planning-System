@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ERPS.ServiceLayer.Models.FeedbackModel>
+
+@{
+    ViewBag.Title = "GetFeedbacks";
+    Layout = "~/Views/Shared/_LayoutManagement.cshtml";
+}
+
+<h2>Feedbacks left to @ViewBag.employeeName @ViewBag.employeeSurname</h2>
+
+<table class="table" border="1">
+    <tr>
+        @*<td>EmployeeId</td>
+        <td>ReviewerId</td>*@
+        <td>WorkedTogether</td>
+        <td>WishToWorkTogether</td>
+        <td>PossitiveSide</td>
+        <td>NegativeSide</td>
+        <td>ThingsToImprove</td>
+        <td>Message</td>
+    </tr>
+    @foreach (var feedback in Model)
+    {
+        <tr>
+            @*<td>@feedback.EmployeeId</td>
+            <td>@feedback.ReviewerId</td>*@
+            <td>@feedback.WorkedTogether</td>
+            <td>@feedback.WishToWorkTogether</td>
+            <td>@feedback.PossitiveSide</td>
+            <td>@feedback.NegativeSide</td>
+            <td>@feedback.ThingsToImprove</td>
+            <td>@feedback.Message</td>
+            @*<td>
+                @Html.ActionLink("Delete", "DeleteFeedback", new
+                {
+                    Id = feedback.Id
+                })
+            </td>*@
+        </tr>
+    }
+
+</table>
+

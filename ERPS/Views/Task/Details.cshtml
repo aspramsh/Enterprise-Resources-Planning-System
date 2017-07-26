@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+	<br />
+	<br />
+
+	<td>@Html.ActionLink("Choose Reporter", "GetEmployees", "Management")|</td>
+	<td>@Html.ActionLink("Choose Assignee", "GetEmployees", "Management") </td>
+
+	<br />
+	<br />
+
+	<td>@Html.ActionLink("Add Task State", "Add State", "Task") </td>
+
+<br />
+<br />
+<br />
+<br />
+	<form id="file-form" action="handler.php" method="POST">
+	<input type="file" id="file-select" name="photos[]" multiple />
+	<button type="submit" id="upload-button" onclick="myFunction()">Upload Attachments </button>
+	<script>
+
+		function myFunction() {
+			var fileSelect = document.getElementById('file-select');
+			var files = fileSelect.files;
+			var file = files[0];
+			var passID = document.getElementById('PassportID').value;
+			var formData = new FormData();
+
+			formData.append(passID, file, file.name);
+			event.stopPropagation(); // Stop stuff happening
+			event.preventDefault(); // Totally stop stuff happening
+			$.ajax({
+				type: "POST",
+				url: "http://localhost:64292/Task/UploadAttachments",
+				data: formData,
+				dataType: 'json',
+				contentType: false,
+				processData: false,
+				success: function (result) {
+					alert(result);
+				},
+
+			});
+		}
+	</script>
+
+</form>

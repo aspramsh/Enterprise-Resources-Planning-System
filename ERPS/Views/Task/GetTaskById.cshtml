@@ -1,0 +1,96 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutManagement.cshtml";
+}
+
+@model ERPS.ServiceLayer.Models.TasksAndEmployees
+@using (Html.BeginForm("GetTaskById", "Task", FormMethod.Post, new { id = "my-form" }))
+{
+	<h1>Task Details</h1><br />
+	<td><input input value="Project Name" type="text"  readonly/></td>
+	@Html.DropDownListFor(x => x.task.ProjectId, new SelectList(Model.projects, "Id", "Name"))<br>
+	<td><input value="Description" type="text" readonly/></td>
+	@Html.TextBoxFor(x => x.task.Description)<br />
+	<td><input value="Source" type="text" readonly/></td>
+	@Html.TextBoxFor(x => x.task.Source)<br />
+	<td><input value="Revision" type="text" readonly/></td>
+	@Html.TextBoxFor(x => x.task.Revision)<br />
+	<td><input value="Comments" type="text" readonly/></td>
+	@Html.TextBoxFor(x => x.task.Comments)<br />
+	<td><input value="Planned Start" type="text" readonly/></td>
+	@Html.TextBoxFor(x => x.task.PlannedStart, new { @type = "date", @Value = Model.task.PlannedStart.Value.ToString("yyyy-MM-dd") })<br />
+	<td><input value="Planned End" type="text" readonly/></td>
+	@Html.TextBoxFor(x => x.task.PlannedEnd, new { @type = "date", @Value = Model.task.PlannedEnd.Value.ToString("yyyy-MM-dd") })<br />
+	<td><input value="Actual Start" type="text" readonly/></td>
+	@Html.TextBoxFor(x => x.task.ActualStart, new { @type = "date", @Value = Model.task.ActualStart.Value.ToString("yyyy-MM-dd") })<br />
+	<td><input value="Actual End" type="text" readonly/></td>
+	@Html.TextBoxFor(x => x.task.ActualEnd, new { @type = "date", @Value = Model.task.PlannedEnd.Value.ToString("yyyy-MM-dd") })<br />
+	<td><input value="Task State" type="text" readonly/></td>
+	@Html.DropDownListFor(x => x.task.StateId, new SelectList(Model.states, "Id", "Name"))<br>
+	<td><input value="Reporter" type="text" readonly/></td>
+	@Html.DropDownListFor(x => x.task.ReporterId, new SelectList(Model.employees, "Id", "Name"), new { id = "ReporterId" })<br>
+	<td><input value="Assignee" type="text" readonly/></td>
+	@Html.DropDownListFor(x => x.task.AssigneeId, new SelectList(Model.employees, "Id", "Name"))<br>
+	<td><input value="Severity" type="text" readonly/></td>
+	@Html.DropDownListFor(x => x.task.severity, new SelectList(Model.severities))<br>
+	@Html.HiddenFor(x => x.task.Id, new { id = "taskId" }) <br />
+	<br />
+	<input type="button" value="Save Changes" id="form-submit" />
+	<br />
+	<br />
+	<form id="file-form" method="POST">
+		<input type="file" id="file-select" multiple />
+		<button type="submit" id="upload-button" onclick="myFunction()">Upload</button>
+	</form>
+
+
+	<script>
+
+		function myFunction() {
+			var fileSelect = document.getElementById('file-select');
+			var files = fileSelect.files;
+			var file = files[0];
+			var passID = document.getElementById('taskId').value;
+			var formData = new FormData();
+
+			formData.append(passID, file, file.name);
+			event.stopPropagation(); // Stop stuff happening
+			event.preventDefault(); // Totally stop stuff happening
+			$.ajax({
+				type: "POST",
+				url: "@ViewBag.urlBase" + "@ViewBag.UploadAttachments",
+				data: formData,
+				dataType: 'json',
+				contentType: false,
+				processData: false,
+				success: function (result) {
+					alert("Uploaded"),
+					window.location.href = '/Task/GetTasks';
+				}
+
+			});
+		}
+	</script>
+	<br />
+	<td>@Html.ActionLink("Download Attachments", "DownloadAttachments", new { id = Model.task.Id }) </td>
+<br/>
+<br />
+<br />
+	
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+	$(document).on('click', '#form-submit', function () {
+		$.ajax({
+			url: "@ViewBag.urlBase" + "@ViewBag.AddTask",
+			type: "POST",
+			data: $('form#my-form').serialize(),
+			success: function (result) {
+				window.location.href = '/task/GetTasks'
+			}
+		});
+	});
+</script>
+<br />
+<br />
+<td>@Html.ActionLink("Add New Task", "AddTask", "Task") </td>

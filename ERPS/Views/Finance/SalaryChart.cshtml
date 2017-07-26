@@ -1,0 +1,76 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutFinance.cshtml";
+}
+<h1> &nbsp &nbsp &nbsp Salary Chart</h1>
+@model List<ERPS.ServiceLayer.Models.SalaryChartModel>
+<html>
+<body>
+	<div id="chartdiv" style="width: 640px; height: 400px;"></div>
+</body>
+</html>
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/serial.js"></script>
+<script>
+	var chartData = [];
+@foreach (var item in Model)
+{
+	@:chartData.push({ "salary": "@item.Salary", "date": "@item.date.ToShortDateString()" });
+}
+	</script>
+<script>
+AmCharts.makeChart("chartdiv", {
+		"type": "serial",
+		"dataProvider": chartData,
+		"categoryField": "date",
+		"chartCursor": {
+			"categoryBalloonEnabled": true,
+			"valueLineAxis": "ValueAxis-1",
+			"valueLineBalloonEnabled": true,
+			"valueLineEnabled": true,
+			"balloonText": "[[visits]]",
+			"showBalloon": true,
+			"zoomable": true
+		},
+		"mouseWheelZoomEnabled": true,
+		"graphs": [{
+			"valueField": "salary",
+			"useNegativeColorIfDown": true,
+			"lineColor": "#fdd400",
+			"negativeLineColor": "#67b7dc",
+			"type": "line",
+			"fillAlphas": 0,
+			"bullet": "round",
+			"angle": 30,
+			"depth3D": 15,
+			"balloonText": "[[date]] : <b>[[salary]]</b>"
+		}],
+		"chartScrollbar": {
+			"scrollbarHeight": 5,
+			"backgroundAlpha": 0.1,
+			"backgroundColor": "#868686",
+			"selectedBackgroundColor": "#67b7dc",
+			"selectedBackgroundAlpha": 1
+		},
+		"chartCursor": {
+			"valueLineEnabled": true,
+			"valueLineBalloonEnabled": true
+		},
+		"categoryAxis": {
+			"autoGridCount": false,
+			"gridCount": chartData.length,
+			"gridPosition": "start",
+			"labelRotation": 90
+		}
+	});
+	chart.addListener("dataUpdated", zoomChart);
+	//zoomChart();
+
+	function zoomChart() {
+		if (chart.zoomToIndexes) {
+			chart.zoomToIndexes(130, chartData.length - 1);
+		}
+	}
+
+
+
+</script>

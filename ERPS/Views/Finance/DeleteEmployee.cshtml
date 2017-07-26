@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutFinance.cshtml";
+}
+@model ERPS.ServiceLayer.Models.EmployeeFinanceId
+@using (Html.BeginForm("actionName", "controllerName", FormMethod.Post, new { id = "my-form" }))
+{
+    @Html.HiddenFor(x=>x.Id)<br />
+
+    <input type="button" value="Submit" id="form-submit" />
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+	$(document).on('click', '#form-submit', function () {
+		$.ajax({
+		    url: "@ViewBag.urlBase" + "@ViewBag.DeleteEmployee",
+			type: "POST",
+			data: $('form#my-form').serialize(),
+		});
+	});
+</script>
+
+

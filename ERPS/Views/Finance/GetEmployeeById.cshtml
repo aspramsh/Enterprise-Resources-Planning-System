@@ -1,0 +1,36 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutFinance.cshtml";
+}
+<h1>Salary Details</h1>
+@model ERPS.ServiceLayer.Models.EmployeeFinanceModel
+@using (Html.BeginForm("actionName", "controllerName", FormMethod.Post, new { id = "my-form" }))
+{
+    @Html.HiddenFor(x => x.Id)<br />
+	<td><input value="Name" readonly /></td><br />
+	@Html.TextBoxFor(x => x.Name)<br />
+	<td><input value= "LastName" readonly /></td><br />
+	@Html.TextBoxFor(x => x.LastName)<br />
+	<td><input value="Salary" readonly /></td><br />
+	@Html.TextBoxFor(x => x.Salary)<br />
+
+    <input type="button" value="Submit" id="form-submit" />
+}
+
+
+	<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript">
+		$(document).on('click', '#form-submit', function () {
+			$.ajax({
+				url: "@ViewBag.urlBase" + "@ViewBag.GetEmployeeById",
+				type: "POST",
+				data: $('form#my-form').serialize(),
+				success: function (data) {
+					$('form#my-form').html(data);
+				},
+			});
+
+		});
+	</script>
+
+
+

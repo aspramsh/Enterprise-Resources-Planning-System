@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "GetEmployeeManagmentByIdView";
+}
+
+<h2>GetEmployeeManagmentByIdView</h2>
+
+@model ERPS.ServiceLayer.Models.EmployeeManagmentId
+@using (Html.BeginForm("actionName", "controllerName", FormMethod.Post, new { id = "my-form" }))
+{
+    <p>
+        <label> ID</label><br>
+        <input name="name" type="text" size="25" maxlength="35">
+        @Html.TextBoxFor(employee => employee.Id)
+    </p>
+
+    <input type="button" value="Submit" id="form-submit" />
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+	$(document).on('click', '#form-submit', function () {
+		$.ajax({
+		    url: "GetEmployeeById",
+			type: "POST",
+			data: $('form#my-form').serialize(),
+		});
+	});
+</script>
+

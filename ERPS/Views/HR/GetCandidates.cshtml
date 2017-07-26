@@ -1,0 +1,42 @@
+﻿@model ERPS.ServiceLayer.Models.HRCandidates
+@{
+    ViewBag.Title = "Index";
+}
+@{
+    Layout = "~/Views/Shared/_LayoutHR.cshtml";
+}
+
+
+<style>
+    .table1 {
+        border: 2px solid #eee;
+    }
+
+        .table1 td {
+            padding: 10px;
+        }
+
+</style>
+
+<table class="table" border="1">
+    <tr style="font-weight:700">
+
+        <td>Name</td>
+        <td>LastName</td>
+        <td>Address</td>
+        <td>Email</td>
+        <td> Phone </td>
+    
+</tr>
+  
+        @foreach (var item in Model.ListOfCandidate)
+        {
+            <tr><td>    @item.Name </td> 
+            <td>    @item.LastName </td> 
+           <td>    @item.Address </td>  
+                <td>    @item.Email </td>  
+           <td>    @item.Phone </td></tr>
+        }
+  
+    </table>
+<td>@Html.ActionLink("AddEmployee", "AddEmployee", "HR")</td>

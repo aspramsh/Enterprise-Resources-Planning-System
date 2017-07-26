@@ -1,0 +1,72 @@
+﻿@{
+	ViewBag.Title = "ERPS Home Page";
+}
+<title>@ViewBag.Title</title>
+<br/>
+<br />
+<div id="container" align="center">
+	<button class="big-button"<a onclick="location.replace('/HR/GetHREmployees')">
+		</a>
+		Human Resources
+	</button>
+	<button class="big-button"
+        <a onclick="location.replace('/Management/GetEmployees')">
+        </a>
+		Management
+	</button>
+</div>
+
+<div id="container" align="center">
+	<button class="big-button"
+		<a onclick="location.replace('/Finance/GetEmployees')">
+		</a>
+		Finance
+	</button>
+</div>
+
+
+
+<style>
+	#container {
+		background-color: #fff;
+		text-align: center;
+	}
+
+	.big-button {
+		display: inline-block;
+		background-color: #ccffcc;
+		color: #000000;
+		font-family: 'Sansita One', cursive;
+		font-size: 26px;
+		font-weight: 500;
+		padding: 20px;
+		height: 150px;
+		width: 270px;
+		text-decoration: none;
+		text-transform: capitalize;
+		-webkit-border-radius: 12px;
+		-moz-border-radius: 12px;
+		border-radius: 12px;
+		-webkit-box-shadow: 0px 15px 0px #009933, 0px 10px 25px rgba(0,0,0,.5);
+		-moz-box-shadow: 0px 15px 0px #009933, 0px 10px 25px rgba(0,0,0,.5);
+		box-shadow: 0px 15px 0px #009933, 0px 10px 25px rgba(0,0,0,.5);
+		margin: 40px auto;
+		border-color: #66ff66;
+		border-width: 10px;
+		border-radius: 40px 100px 100px 100px;
+		padding: 20px;
+		cursor: pointer;
+		white-space: nowrap;
+	}
+
+		.big-button:active {
+			display: inline-block;
+			box-shadow: 0px 3px 0px #33CC33, 0px 3px 6px rgba(0,0,0,.9);
+			position: relative;
+			top: 20px;
+		}
+	.space {
+		margin-bottom:15px;
+	}
+
+</style>

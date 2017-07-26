@@ -1,0 +1,86 @@
+@*@model ERPS.ServiceLayer.Models.EmployeeManagementModel*@
+@*@model IEnumerable<ERPS.ServiceLayer.Models.EmployeeManagementModel>*@
+@model ERPS.ServiceLayer.Models.FeedbackModel
+
+@{
+    ViewBag.Title = "LeaveFeedback";
+    Layout = "~/Views/Shared/_LayoutManagement.cshtml";
+    Html.EnableClientValidation(false);
+}
+
+<h2>Leave a feedback to @Model.Employee.Name @Model.Employee.Surname @*@ViewBag.employeeName  @ViewBag.employeeSurname*@</h2>
+
+@using (Html.BeginForm("actionName", "controllerName", FormMethod.Post, new { id = "my-form" }))
+{
+    <div class="textInput">
+        @Html.HiddenFor(feedback => feedback.Employee.Id @*feedback.EmployeeId*@)
+        <!-- first name, last name and proffesion insert text fields -->
+        Please, find your name in the list below
+        <br>
+        @*@Html.DropDownList("Exemplo", new SelectList(Model.Employees, "Id", "Name"))*@
+        @Html.DropDownListFor(feedback => feedback.ReviewerId, new SelectList(Model.Employees, "Id", "Name"))
+        @*<input type="text" name="ID">*@
+        <br>
+        <br>
+    
+        Have you worked with @Model.Employee.Name @Model.Employee.Surname@*@ViewBag.employeeName  @ViewBag.employeeSurname*@?
+        @Html.RadioButtonFor(feedback => feedback.WorkedTogether, true) Yes
+        @Html.RadioButtonFor(feedback => feedback.WorkedTogether, false) No
+        <br>
+        <br>
+        @*<br>
+        <input type="radio" name="WorkedTogether" value="True"> Yes
+        <input type="radio" name="WorkedTogether" value="False"> No
+        <br>
+        <br>*@
+    
+        Would you like to work with @Model.Employee.Name @Model.Employee.Surname@*@ViewBag.employeeName  @ViewBag.employeeSurname*@ in the future?
+        
+        @Html.RadioButtonFor(feedback => feedback.WishToWorkTogether, true) Yes
+        @Html.RadioButtonFor(feedback => feedback.WishToWorkTogether, false) No 
+        <br>
+        <br>
+        @*@Html.TextAreaFor(feedback => feedback.PossitiveSide, new { rows = 15, columns = 120 })*@
+        What possitive things can you tell about @Model.Employee.Name @Model.Employee.Surname@*@ViewBag.employeeName  @ViewBag.employeeSurname*@?
+        <br>
+        <textarea name="PossitiveSide" rows="15" cols="120"></textarea>
+        <br>
+        <br>
+    
+        What negative things can you tell about @Model.Employee.Name @Model.Employee.Surname@*ViewBag.employeeName  @ViewBag.employeeSurname*@?
+        <br>
+        <textarea name="NegativeSide" rows="15" cols="120"></textarea>
+        <br>
+        <br>
+    
+        What @Model.Employee.Name @Model.Employee.Surname@*@ViewBag.employeeName  @ViewBag.employeeSurname*@ should improve?
+        <br>
+        <textarea name="ThingsToImprove" rows="15" cols="120"></textarea>
+        <br>
+        <br>
+    
+        <!-- message field, where user can input a message to send-->
+        Message:
+        <br>
+        <textarea name="Message" rows="15" cols="120"></textarea>
+        <br>
+        <br>
+    </div>
+}
+<input type="button" value="Submit Feedback" id="form-submit" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+	$(document).on('click', '#form-submit', function () {
+		$.ajax({
+		    // urlBase = "http://localhost:64292/"
+		    // updateEmployeeAction = "Management/ParseJSONEmployee"
+		    // url: http://localhost:64292/Management/ParseJSONEmployee
+		    url: "@ViewBag.urlBase" + "@ViewBag.leaveFeedback",
+			type: "POST",
+			data: $('form#my-form').serialize(),
+			success: function (result) {
+			    window.location.href = '/Management/GetEmployees'
+			}
+		});
+	});
+</script>
